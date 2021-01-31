@@ -1,0 +1,10 @@
+{
+  "name": "Avatar Icon Viewer",
+  "description": "Allows you to view server icons, user avatars in fullscreen via the context menu, or copy the link to them.",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": {
+    "name": "king_ultron99",
+    "id": "148203660088705025"
+  }
+}
