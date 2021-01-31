@@ -11,16 +11,13 @@ export default class AvatarIconViewer extends Plugin {
   }
 
   _patchGuildMenu() {
-
       const GuildContextMenu = getModule(
         (m) => m.default && m.default.displayName === 'GuildContextMenu'
       );
 
       patch("guild-context", GuildContextMenu, "default", (props, res) => {
-
         const { guild } = props[0];
         const { icon }  = guild;
-        
         const url = `https://cdn.discordapp.com/icons/${guild.id}/${icon}.png?size=2048`;
           
         res.props.children.splice(
@@ -35,7 +32,7 @@ export default class AvatarIconViewer extends Plugin {
 
   _patchUserMenu() {
     const UserContextMenu = getModule(m => m.default && m.default.displayName && (m.default.displayName.endsWith("UserContextMenu") || m.default.displayName == "DMUserContextMenu"));
-    
+
     patch("user-context", UserContextMenu, "default", (props, res) => {
       
       const { user } = props[0];
@@ -65,7 +62,7 @@ export default class AvatarIconViewer extends Plugin {
 
   stop() {
     unpatch('guild-context');
-    unpatch('server-menu')
+    unpatch('server-menu');
     unpatch("user-context");
   }
 }
