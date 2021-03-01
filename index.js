@@ -19,7 +19,7 @@ export default class AvatarIconViewer extends Plugin {
 
       patch("guild-context", GuildContextMenu, "default", ([{guild}], res) => {
           
-        res.props.children.splice(0, 0, this.createContext(guild.getIconURL(getModule(['hasAnimatedGuildIcon'], false).hasAnimatedAvatar(guild) ? "gif" : "webp").split("?")[0]+"?size=2048", "Icon"));
+        res.props.children.splice(0, 0, this.createContext(guild.getIconURL(getModule(['hasAnimatedGuildIcon'], false).hasAnimatedGuildIcon(guild) ? "gif" : "webp").split("?")[0]+"?size=2048", "Icon"));
             
         return res;
       });
