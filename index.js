@@ -29,8 +29,16 @@ export default class AvatarIconViewer extends Plugin {
     const UserContextMenu = getModule(m => m.default && m.default.displayName && (m.default.displayName.endsWith("UserContextMenu")));
     
     patch("user-context", UserContextMenu, "default", ([{user}], res) => { 
+
+      let avatar;
+
+      if (user.avatar.startsWith('a_')) {
+        avatar = user.getAvatarURL(user.avatar).replace('.webp', '.gif');
+      } else {
+        avatar = user.getAvatarURL(user.avatar);
+      }
       
-      res.props.children.props.children.splice(0, 0, this.createContext(user.getAvatarURL(getModule(['hasAnimatedAvatar'], false).hasAnimatedAvatar(user) ? "gif" : "webp").split("?")[0]+"?size=2048",`Avatar`));
+      res.props.children.props.children.splice(0, 0, this.createContext(avatar.split("?")[0]+"?size=2048",`Avatar`));
       return res;
     });
   }
@@ -50,8 +58,16 @@ export default class AvatarIconViewer extends Plugin {
     const DMUserContextMenu = getModule(m => m.default && m.default.displayName === "DMUserContextMenu");
 
     patch("user-dm-menu", DMUserContextMenu, "default", ([{user}], res) => {
+      let avatar;
+
+      if (user.avatar.startsWith('a_')) {
+        avatar = user.getAvatarURL(user.avatar).replace('.webp', '.gif');
+      } else {
+        avatar = user.getAvatarURL(user.avatar);
+      }
       
-      res.props.children.props.children.splice(0, 0, this.createContext(user.getAvatarURL(getModule(['hasAnimatedAvatar'], false).hasAnimatedAvatar(user) ? "gif" : "webp").split("?")[0]+"?size=2048", "Avatar"))
+      
+      res.props.children.props.children.splice(0, 0, this.createContext(avatar.split("?")[0]+"?size=2048", "Avatar"))
 
       return res
     })
